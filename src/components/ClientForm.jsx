@@ -1,29 +1,95 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
+import { Button, TextField, Select, FormHelperText, FormControl, InputLabel } from '@mui/material'
 
-let ContactForm = (props) => {
+const renderTextField = ({
+  input,
+  label,
+  placeholder,
+  meta: { touched, invalid, error },
+  ...custom
+}) => (
+  <TextField
+    InputLabelProps={{ shrink: true }} 
+    label={label}
+    error={touched && invalid}
+    helperText={touched && error}
+    className='custom-textfield'
+    placeholder={placeholder}
+    {...input}
+    {...custom}
+  />
+);
+
+const renderFromHelper = ({ touched, error }) => {
+  if (!(touched && error)) {
+    return
+  } else {
+    return <FormHelperText>{touched && error}</FormHelperText>
+  }
+}
+
+const renderSelectField = ({
+  input,
+  label,
+  meta: { touched, error },
+  children,
+  ...custom
+}) => (
+  <FormControl error={touched && error}>
+    <InputLabel id="sex" htmlFor="sex" shrink={true}>Sexo</InputLabel>
+    <Select
+      native
+      notched={true}
+      {...input}
+      {...custom}
+      label='sexo'
+      placeholder='Selecione'
+      inputProps={{
+        name: 'Sexo',
+        id: 'sex'
+      }}
+    >
+    {children}
+    </Select>
+    {renderFromHelper({ touched, error })}
+  </FormControl>
+);
+
+let ClientForm = (props) => {
   const { handleSubmit } = props
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={ handleSubmit }>
       <div>
-          <label htmlFor="name">Nome</label>
-          <Field name="name" component="input" type="text"/>
+          <Field name="name" component={ renderTextField } type="text" label="Nome" placeholder='Digite aqui seu nome'/>
         </div>
         <div>
-          <label htmlFor="email">Email</label>
-          <Field name="email" component="input" type="text"/>
+          <Field name="email" component={ renderTextField } type="text" label="E-mail" placeholder='Digite aqui seu e-mail'/>
         </div>
         <div>
-          <label htmlFor="sex">Sexo</label>
-          <Field name="sex" component="input" type="text"/>
+          
+            
+          
+          <Field
+            name="sex"
+            component={ renderSelectField }
+            label="Sexo"
+            required
+          >
+            <option value='' disabled selected hidden>Selecione</option>
+            <option value='masculino'>Masculino</option>
+            <option value='feminino'>Feminino</option>
+        </Field>
       </div>
-      <button type="submit">FINALIZAR COMPRA</button>
+      <Button type="submit" variant="contained" color="primary">
+        FINALIZAR COMPRA
+      </Button>
     </form>
   )
 }
 
-ContactForm = reduxForm({
+ClientForm = reduxForm({
   form: 'user_info'
-})(ContactForm)
+})(ClientForm)
 
-export default ContactForm
+export default ClientForm
