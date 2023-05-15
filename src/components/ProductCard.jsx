@@ -1,37 +1,38 @@
 import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { updateQuantity } from '../redux/actions/products';
 
 const ProductCard = ({ id, name, price, quantity }) => {
   const dispatch = useDispatch();
 
   const handleQuantityChange = (newQuantity) => {
-    dispatch(updateQuantity(id, name, price, newQuantity));
+    dispatch(updateQuantity(id, newQuantity));
   };
-
-  const handleQuantityDecrement = (newQuantity) => {
-    dispatch(updateQuantity(id, name, price, quantity - 1));
-  };
-
-  const handleQuantityIncrement = (newQuantity) => {
-    dispatch(updateQuantity(id, name, price, quantity + 1));
-  };
-
 
   return (
-    <div id={id}>Produto:
+    <div key={id} id={id}>
+      <img src={require(`../images/produto-0${id}.jpeg`)} alt={name} />
       <h2>{name}</h2>
       <h2>{price}</h2>
       <div>
-        <button onClick={handleQuantityDecrement}>-</button>
+        <button onClick={(e) => handleQuantityChange(parseInt(quantity) - 1)}>-</button>
         <input
           type="number"
           value={quantity}
           onChange={(e) => handleQuantityChange(parseInt(e.target.value))}
         />
-        <button onClick={handleQuantityIncrement}>+</button>
+        <button onClick={(e) => handleQuantityChange(parseInt(quantity) + 1)}>+</button>
       </div>
     </div>
   )
 }
 
-export default ProductCard
+const mapStateToProps = (state, ownProps) => {
+  const product = state?.products?.products.find((p) => p.id === ownProps.id);
+  const quantity = product?.quantity ?? 0;
+  return {
+    quantity: quantity,
+  }
+}
+
+export default connect(mapStateToProps)(ProductCard);

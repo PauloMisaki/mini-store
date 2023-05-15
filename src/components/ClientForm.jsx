@@ -67,9 +67,6 @@ let ClientForm = (props) => {
           <Field name="email" component={ renderTextField } type="text" label="E-mail" placeholder='Digite aqui seu e-mail'/>
         </div>
         <div>
-          
-            
-          
           <Field
             name="sex"
             component={ renderSelectField }
