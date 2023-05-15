@@ -4,6 +4,8 @@ import ProductCard from './ProductCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateTotal } from '../redux/actions/products'
 
+// Componente pai da lista de produtos, que despacha
+// a action responsável por atualizar o valor total dos produtos
 const ProductsBox = () => {
   const products = useSelector((state) => state.products.products)
   // const totalValue = useSelector((state) => state.products.total)
@@ -25,7 +27,7 @@ const ProductsBox = () => {
     <div>
       <h1>Produtos</h1>
       {productsList.map((product) => {
-        return <ProductCard id={product.id} name={product.name} price={product.price}/>
+        return <ProductCard key={product.id} id={product.id} name={product.name} price={product.price}/>
       })}
     </div>
   )

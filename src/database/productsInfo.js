@@ -1,3 +1,4 @@
+// Uma lista mockada de produtos para ser renderizada no componente ProductCard
 export const productsList = [
   { id: 1, name: 'AirPods Apple Fones de ouvido', price: 1499.00, src: '../images/produto-01.jpeg' },
   { id: 2, name: 'Capa de silicone para iPhone 8/7 cor Areia - rosa', price: 299.00, src: '../images/produto-02.jpeg' },

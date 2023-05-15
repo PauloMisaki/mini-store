@@ -11,6 +11,7 @@ const Checkout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // Função zera o valor total e quaisquer quantidade de itens adicionados
   const handleNewPurchase = () => {
     dispatch(resetUserInfo())
     dispatch(resetProductsInfo())
