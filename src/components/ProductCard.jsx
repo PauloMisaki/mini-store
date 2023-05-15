@@ -13,7 +13,7 @@ const ProductCard = ({ id, name, price, quantity }) => {
     <div key={id} id={id}>
       <img src={require(`../images/produto-0${id}.jpeg`)} alt={name} />
       <h2>{name}</h2>
-      <h2>{price}</h2>
+      <h2>R$: {price},00</h2>
       <div>
         <button onClick={(e) => handleQuantityChange(parseInt(quantity) - 1)}>-</button>
         <input

@@ -1,6 +1,11 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { Button, TextField, Select, FormHelperText, FormControl, InputLabel } from '@mui/material'
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { updateUserInfo } from '../redux/actions/checkout';
+import { useNavigate } from "react-router-dom";
+
 
 const renderTextField = ({
   input,
@@ -10,18 +15,18 @@ const renderTextField = ({
   ...custom
 }) => (
   <TextField
-    InputLabelProps={{ shrink: true }} 
-    label={label}
-    error={touched && invalid}
-    helperText={touched && error}
-    className='custom-textfield'
-    placeholder={placeholder}
-    {...input}
-    {...custom}
+  InputLabelProps={{ shrink: true }} 
+  label={label}
+  error={touched && invalid}
+  helperText={touched && error}
+  className='custom-textfield'
+  placeholder={placeholder}
+  {...input}
+  {...custom}
   />
-);
-
-const renderFromHelper = ({ touched, error }) => {
+  );
+  
+  const renderFromHelper = ({ touched, error }) => {
   if (!(touched && error)) {
     return
   } else {
@@ -49,7 +54,7 @@ const renderSelectField = ({
         name: 'Sexo',
         id: 'sex'
       }}
-    >
+      >
     {children}
     </Select>
     {renderFromHelper({ touched, error })}
@@ -57,10 +62,22 @@ const renderSelectField = ({
 );
 
 let ClientForm = (props) => {
-  const { handleSubmit } = props
+  const totalValue = useSelector((state) => state.products.total)
+  const { handleSubmit, pristine, submitting } = props
+  
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const submitForm = (values) => {
+    dispatch(updateUserInfo(values));
+    navigate('/checkout');
+  };
+  
   return (
-    <form onSubmit={ handleSubmit }>
-      <div>
+    <div>
+      <h1>Dados do Cliente</h1>
+      <form onSubmit={ handleSubmit(submitForm) }>
+        <div>
           <Field name="name" component={ renderTextField } type="text" label="Nome" placeholder='Digite aqui seu nome'/>
         </div>
         <div>
@@ -76,12 +93,14 @@ let ClientForm = (props) => {
             <option value='' disabled selected hidden>Selecione</option>
             <option value='masculino'>Masculino</option>
             <option value='feminino'>Feminino</option>
-        </Field>
-      </div>
-      <Button type="submit" variant="contained" color="primary">
-        FINALIZAR COMPRA
-      </Button>
-    </form>
+          </Field>
+        </div>
+        <h2>Total: R$ {totalValue},00</h2>
+        <Button type="submit" variant="contained" color="primary" disabled={pristine || submitting}>
+          FINALIZAR COMPRA
+        </Button>
+      </form>
+    </div>
   )
 }
 

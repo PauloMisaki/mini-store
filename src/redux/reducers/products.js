@@ -1,4 +1,4 @@
-import { UPDATE_QUANTITY } from "../actions/types";
+import { RESET_PRODUCT_INFO, UPDATE_QUANTITY, UPDATE_TOTAL } from "../actions/types";
 
 
 const initialState = {
@@ -12,10 +12,16 @@ const initialState = {
     { id: 7, name: 'Smart Keyboard para iPad Pro 12,9 polegadas - inglês (EUA)', price: 1099, quantity: 0 },
     { id: 8, name: 'Carregador USB de 5W Apple', price: 149, quantity: 0 },
   ],
+  total: 0,
 };
 
 const productsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case UPDATE_TOTAL:
+      return {
+        ...state,
+        total: action.payload,
+      };
     case UPDATE_QUANTITY:
       const { id, quantity } = action.payload;
       const updatedProducts = state.products.map((product) => {
@@ -26,7 +32,11 @@ const productsReducer = (state = initialState, action) => {
         }
       });      
       return { ...state, products: updatedProducts }
-
+    case RESET_PRODUCT_INFO:
+      const resettedProducts = state.products.map((product) => {
+        return { ...product, quantity: 0 }
+      });
+      return { ...state, products: resettedProducts, total: 0 }
     default:
       return state;
   }
