@@ -6,12 +6,12 @@
   'Produto' e 'Finalização da Compra' baseado em arquivos template.
 
   Com as funcionalidades de:
-  > Adicionar e remover produtos de uma lista salva no estado global pelo Redux.
-  > Verificar o valor total (preço base * quantidade) de todos os produtos inseridos.
-  > Se cadastrar como usuário no formulário do redux-form com validação onSubmit e field-level.
-  > Ao concluir a compra, o usuário é redirecionado e consegue confirmar a compra e ver em tela os estados salvos do redux: Nome e Valor total.
-  > (os outros valores também podem ser consultados, mas não foram necessários para fins deste teste)
-  > Ao clicar em Iniciar nova compra, o estado é completamente zerado para que uma nova compra possa ser feita.
+  - Adicionar e remover produtos de uma lista salva no estado global pelo Redux.
+  - Verificar o valor total (preço base * quantidade) de todos os produtos inseridos.
+  - Se cadastrar como usuário no formulário do redux-form com validação onSubmit e field-level.
+  - Ao concluir a compra, o usuário é redirecionado e consegue confirmar a compra e ver em tela os estados salvos do redux: Nome e Valor total.
+  - (os outros valores também podem ser consultados, mas não foram necessários para fins deste teste)
+  - Ao clicar em Iniciar nova compra, o estado é completamente zerado para que uma nova compra possa ser feita.
 
 ## Tecnologias utilizadas
   Este projeto foi feito utilizando CRA,
