@@ -64,6 +64,10 @@ option {
   margin-right: 1rem;
 }
 
+.finalize-buy:disabled {
+  background-color: dimgray !important;
+}
+
 .client-form {
   display: flex;
   flex-direction: row;
@@ -76,6 +80,7 @@ option {
   right: 5%;
   align-items: end;
   padding-bottom: 30px !important;
+  text-align: end;
 }
 
 .value {
@@ -129,6 +134,13 @@ option {
   padding-bottom: 2rem;
   border-radius: 15px 15px 15px 15px;
   box-shadow: 2px 5px 15px 2px rgba(0,0,0,0.35);
+}
+
+.alert-text {
+  color: rgb(247, 62, 62);
+  position: absolute;
+  bottom: 70%;
+  right: 0;
 }
 
 @media only screen and (max-width: 425px) {

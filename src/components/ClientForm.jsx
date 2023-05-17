@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { Button, TextField, Select, FormHelperText, FormControl, InputLabel } from '@mui/material'
 import { useSelector } from 'react-redux';
@@ -69,16 +69,18 @@ const renderSelectField = ({
 
 // Função com regex simples para verificar e-mail válido
 const isValidEmail = (email) => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
   return emailRegex.test(email);
 };
 
-// Função para validar o campo do nome
+// Função para validar os campos do formulário
 const validate = (values) => {
   const errors = {};
 
   if (!values.name) {
     errors.name = 'Campo obrigatório';
+  } else if (values.name.length <= 2) {
+    errors.name = 'Nome inválido (pelo menos 3 caracteres)'
   }
 
   if (!values.email) {
@@ -98,13 +100,27 @@ const validate = (values) => {
 // Função do formulário que recebe os valores e despacha para o redux
 // Para ter os valores utilizados em outra tela
 let ClientForm = (props) => {
+  const [showCartTooltip, setShowCartTooltip] = useState(false);
+  const [buttonValid, setButtonValid] = useState(false);
   const totalValue = useSelector((state) => state.products.total)
   const { handleSubmit, pristine, submitting } = props
+
+  useEffect(() => {
+    if (totalValue) {
+      setButtonValid(true)
+    } else {
+      setButtonValid(false)
+    }
+  }, [totalValue])
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const submitForm = (values) => {
+    if (!totalValue) {
+      setShowCartTooltip(true)
+      return
+    }
     dispatch(updateUserInfo(values));
     navigate('/checkout');
   };
@@ -133,10 +149,11 @@ let ClientForm = (props) => {
               <option value='feminino'>Feminino</option>
             </Field>
           </div>
-        </div>
+        </div> 
         <div className='value-confirmation'>
+        {(showCartTooltip && !buttonValid) && <h5 className='alert-text'>O carrinho está vazio!</h5>}
         <h2 className='value'>Total: R$ {totalValue},00</h2>
-        <Button type="submit" variant="contained" style={{ backgroundColor: orange[400], color: '#fff' }} disabled={!totalValue && (pristine || submitting)}>
+        <Button type="submit" variant="contained" className='finalize-buy' style={{ backgroundColor: orange[400], color: '#fff' }} disabled={pristine || submitting}>
           FINALIZAR COMPRA
         </Button>
         </div>
