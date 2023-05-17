@@ -23,9 +23,9 @@
 
 > Ou baixar esse repositório na sua máquina e rodar localmente usando: `
 ```
-npm install ou yarn add .
+npm install --force (comando necessário por usar algumas funções do m-ui que não tiveram atualização para funcionar em conjunto com o redux-form)
 ```
 em seguida:
 ```
-npm start ou yarn start, e acessar através do localhost
+npm start, e acessar através do localhost
 ```
