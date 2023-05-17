@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { updateUserInfo } from '../redux/actions/checkout';
 import { useNavigate } from "react-router-dom";
+import { orange } from '@mui/material/colors'
 
 // Usar o Material-Ui em conjunto com o redux-form
 // demanda a criação de uma função para definir
@@ -110,30 +111,35 @@ let ClientForm = (props) => {
   
   return (
     <div>
-      <h1>Dados do Cliente</h1>
+      <h1 className='client-info'>Dados do Cliente</h1>
       <form onSubmit={ handleSubmit(submitForm) }>
-        <div>
-          <Field name="name" component={ renderTextField } type="text" label="Nome" placeholder='Digite aqui seu nome'/>
+        <div className='client-form'>
+          <div>
+            <Field name="name" component={ renderTextField } type="text" label="Nome" placeholder='Digite seu nome aqui' className='name-input'/>
+          </div>
+          <div>
+            <Field name="email" component={ renderTextField } type="text" label="E-mail" placeholder='Digite seu e-mail aqui' className='email-input'/>
+          </div>
+          <div>
+            <Field
+              name="sex"
+              component={ renderSelectField }
+              label="Sexo"
+              className='sex-select'
+              required
+            >
+              <option value='' disabled selected hidden>Selecione</option>
+              <option value='masculino'>Masculino</option>
+              <option value='feminino'>Feminino</option>
+            </Field>
+          </div>
         </div>
-        <div>
-          <Field name="email" component={ renderTextField } type="text" label="E-mail" placeholder='Digite aqui seu e-mail'/>
-        </div>
-        <div>
-          <Field
-            name="sex"
-            component={ renderSelectField }
-            label="Sexo"
-            required
-          >
-            <option value='' disabled selected hidden>Selecione</option>
-            <option value='masculino'>Masculino</option>
-            <option value='feminino'>Feminino</option>
-          </Field>
-        </div>
-        <h2>Total: R$ {totalValue},00</h2>
-        <Button type="submit" variant="contained" color="primary" disabled={pristine || submitting}>
+        <div className='value-confirmation'>
+        <h2 className='value'>Total: R$ {totalValue},00</h2>
+        <Button type="submit" variant="contained" style={{ backgroundColor: orange[400], color: '#fff' }} disabled={!totalValue && (pristine || submitting)}>
           FINALIZAR COMPRA
         </Button>
+        </div>
       </form>
     </div>
   )

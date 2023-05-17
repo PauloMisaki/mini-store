@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { resetUserInfo } from '../redux/actions/checkout'
 import { resetProductsInfo } from '../redux/actions/products'
 import { Button } from '@mui/material';
+import { orange } from '@mui/material/colors';
 
 const Checkout = () => {
   const totalValue = useSelector((state) => state.products.total)
@@ -19,17 +20,19 @@ const Checkout = () => {
   }
 
   return (
-    <div>
-      <h2>{userInfo.name},</h2>
-      <h4>
-        Sua compra no valor{' '} 
-        <span>R$: {totalValue},00</span>
-        <br/>
-        foi finalizada com sucesso
-      </h4>
-      <img src={require(`../images/purchase.png`)} alt="Confirmação da compra" />
-      <div>
-        <Button onClick={ handleNewPurchase } variant="contained">INICIAR NOVA COMPRA</Button>
+    <div className='checkout-page'>
+      <div className='checkout-success'>
+        <h2 style={{ color: '#2A3F63' }}>{userInfo.name},</h2>
+        <h4 style={{ color: '#2A3F63' }}> 
+          Sua compra no valor{' '} 
+          <span style={{ color: '#36ADFF' }}>R$ {totalValue},00</span>
+          <br/>
+          foi finalizada com sucesso
+        </h4>
+        <img src={require(`../images/purchase.png`)} alt="Confirmação da compra" className='svg-done'/>
+        <div>
+          <Button onClick={ handleNewPurchase } variant="contained" style={{ backgroundColor: orange[400], color: '#fff' }}>INICIAR NOVA COMPRA</Button>
+        </div>
       </div>
     </div>
   )

@@ -25,10 +25,12 @@ const ProductsBox = () => {
 
   return (
     <div>
-      <h1>Produtos</h1>
-      {productsList.map((product) => {
-        return <ProductCard key={product.id} id={product.id} name={product.name} price={product.price}/>
-      })}
+      <h1 className='products-header'>Produtos</h1>
+      <div className='products-list'>
+        {productsList.map((product) => {
+          return <ProductCard key={product.id} id={product.id} name={product.name} price={product.price}/>
+        })}
+      </div>
     </div>
   )
 }

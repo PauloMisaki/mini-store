@@ -24,6 +24,9 @@ const productsReducer = (state = initialState, action) => {
       };
     case UPDATE_QUANTITY:
       const { id, quantity } = action.payload;
+      if (quantity < 0) {
+        return state;
+      }
       const updatedProducts = state.products.map((product) => {
         if (product.id === id) {
           return { ...product, quantity }

@@ -1,16 +1,16 @@
 .App {
   text-align: center;
+  width: 100%;
+  min-width: 320px;
+  max-width: 1280px;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
 
 .App-header {
@@ -28,15 +28,6 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 select:required:invalid {
   color: gray;
 }
@@ -45,4 +36,199 @@ option[value=""][disabled] {
 }
 option {
   color: black;
+}
+
+.products-page {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  flex-wrap: wrap;
+}
+
+.products-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 25%
+}
+
+.client-info {
+  font-size: 18px;
+  font-weight: 400;
+  text-align: left;
+  border-bottom: 1px solid #4a4a4a;
+  padding-bottom: 0.4rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.client-form {
+  display: flex;
+  flex-direction: row;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.value-confirmation {
+  position: absolute;
+  right: 5%;
+  align-items: end;
+  padding-bottom: 30px !important;
+}
+
+.value {
+  font-weight: 500;
+  color: #2A3F63;
+  margin-bottom: 14px;
+}
+
+.name-input {
+  margin-top: 0.2rem !important;
+  margin-bottom: 0.4rem !important;
+  min-width: 300px !important;
+}
+
+.email-input {
+  margin-top: 0.2rem !important;
+  margin-bottom: 0.4rem !important;
+  min-width: 300px !important;
+}
+
+.sex-select {
+  margin-top: 0.2rem !important;
+  margin-bottom: 0.4rem !important;
+  min-width: 180px !important;
+}
+
+.products-header {
+  font-size: 22px;
+  font-weight: 400;
+  text-align: left;
+  border-bottom: 1px solid #4a4a4a;
+  padding-bottom: 0.4rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.svg-done {
+  transform: scale(0.6);
+  position: relative;
+  padding-left: 70px;
+}
+
+.checkout-success {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  width: 100%;
+  max-width: 310px;
+  padding-bottom: 2rem;
+  border-radius: 15px 15px 15px 15px;
+  box-shadow: 2px 5px 15px 2px rgba(0,0,0,0.35);
+}
+
+@media only screen and (max-width: 425px) {
+  .products-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .App {
+    max-width: 100vh !important;
+    align-items: center;
+    margin: auto;
+  }
+
+  .client-form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .sex-select {
+    min-width: 300px !important;
+  }
+}
+
+@media only screen and (min-width: 426px) {
+  .client-form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
+  }
+
+  .name-input {
+    min-width: 340px !important;
+    margin-right: 16px !important;
+  }
+
+  .email-input {
+    min-width: 340px !important;
+    margin-right: 16px !important;
+  }
+
+  .sex-select {
+    min-width: 160px !important;
+  }
+  
+}
+
+@media only screen and (min-width: 769px) {
+  .client-form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: 0rem !important;
+    margin-right: 1rem;
+    row-gap: 10px;
+    padding-bottom: 10px;
+  }
+
+  .value-confirmation {
+    position: absolute;
+    right: 18%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .client-form {
+    width: 100%;
+  }
+
+  .name-input {
+    min-width: 390px !important;
+  }
+
+  .email-input {
+    min-width: 390px !important;
+  }
+
+  .value-confirmation {
+    position: absolute;
+    right: 4%;
+  }
+}
+
+@media only screen and (min-width: 1080px) {
+  .value-confirmation {
+    position: absolute;
+    right: 18%;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .value-confirmation {
+    position: absolute;
+    right: 26.3%;
+  }
 }
